@@ -1,0 +1,20 @@
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    environment:
+      - CLICKHOUSE_PASSWORD=clickhouseadmin
+      - CLICKHOUSE_DB=tiktoklive
+      - CLICKHOUSE_USER=tiktoklive
+    volumes:
+      - ch_data:/var/lib/clickhouse/
+      - ch_logs:/var/log/clickhouse-server/
+    ports:
+      - "18123:8123"
+      - "19000:9000"
+volumes:
+  ch_data:
+  ch_logs:
